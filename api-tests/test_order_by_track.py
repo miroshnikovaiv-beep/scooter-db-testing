@@ -1,3 +1,5 @@
+# Ирина Мирошникова, 38-я когорта — Финальный проект. Инженер по тестированию плюс
+
 import requests
 import configuration
 import data
