@@ -21,9 +21,9 @@
 
 ---
 
-## Структура репозитория
+### Структура репозитория
 
-```md
+```
 scooter-db-testing/
 ├── api-tests/                  # API автотесты
 │   ├── configuration.py        # Конфигурация эндпоинтов
@@ -44,7 +44,7 @@ scooter-db-testing/
 │
 ├── .gitignore
 └── README.md
-````
+```
 
 ---
 
