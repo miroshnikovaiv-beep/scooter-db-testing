@@ -1,26 +1,17 @@
 # Ирина Мирошникова, 38-я когорта — Финальный проект. Инженер по тестированию плюс
 
-import requests
-import configuration
 import data
+import sender_stand_request as stand
 
+def test_create_order_returns_track():
+    response = stand.create_order(data.order_body)
+    assert response.status_code in (200, 201)
+    assert response.json().get("track") is not None
 
-def test_create_order_and_get_by_track_returns_200():
-    # Создаём заказ
-    create_url = configuration.BASE_URL + configuration.CREATE_ORDER_PATH
-    create_response = requests.post(create_url, json=data.order_body)
-
-    assert create_response.status_code in (200, 201), (
-        f"Create order failed: {create_response.status_code}, {create_response.text}"
-    )
-
+def test_get_order_by_track_returns_200():
+    create_response = stand.create_order(data.order_body)
     track = create_response.json().get("track")
-    assert track is not None, f"No track in response: {create_response.json()}"
 
-    # Получаем заказ по треку
-    get_url = configuration.BASE_URL + configuration.GET_ORDER_BY_TRACK_PATH
-    get_response = requests.get(get_url, params={"t": track})
+    get_response = stand.get_order_by_track(track)
+    assert get_response.status_code == 200
 
-    assert get_response.status_code == 200, (
-        f"Get order failed: {get_response.status_code}, {get_response.text}"
-    )
